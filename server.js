@@ -1,15 +1,12 @@
-let express = require('express');
+const express = require('express');
 
-let app = express();
-let PORT = process.env.PORT || 8000;
+const app = express();
+const PORT = process.env.PORT || 8000;
 
-let apiRoutes = require('./routes/api.js');
-let adminRoutes = require('./routes/admin.js');
-let mainRoutes = require('./routes/main.js');
-
-app.use('/api', apiRoutes)
-app.use('/admin', adminRoutes)
-app.use('/', mainRoutes)
+// setting up routes
+app.use('/api', require('./routes/api.js'))
+app.use('/admin', require('./routes/admin.js'))
+app.use('/', require('./routes/main.js'))
 
 // catch-all for incorrect get requests
 app.get('*', (req, res) => {
